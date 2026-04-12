@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKETCH — Wireframing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      SKETCH
+    </div>
+    <div class="header-sep"></div>
+
+    <!-- Outils de dessin -->
+    <div class="tool-group">
+      <button class="tool-btn active" data-tool="select">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-7 1-4 7z"/></svg>
+        <span class="tool-tip">Sélection (V)</span>
+      </button>
+      <button class="tool-btn" data-tool="rect">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+        <span class="tool-tip">Rectangle (R)</span>
+      </button>
+      <button class="tool-btn" data-tool="text">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+        <span class="tool-tip">Texte (T)</span>
+      </button>
+      <button class="tool-btn" data-tool="frame">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 7h5M2 17h5M17 7h5M17 17h5"/></svg>
+        <span class="tool-tip">Cadre (F)</span>
+      </button>
+      <button class="tool-btn" data-tool="pan">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 00-2-2 2 2 0 00-2 2M14 9V4a2 2 0 00-2-2 2 2 0 00-2 2v1M10 9a2 2 0 00-2-2 2 2 0 00-2 2v6M6 15a2 2 0 00-2 2c0 2.5 2 3 3.5 5"/><path d="M18 11a2 2 0 012 2v4c0 2.5-1.5 5-4 7H10c-1.5-2-4-3.5-4-7"/></svg>
+        <span class="tool-tip">Main (H)</span>
+      </button>
+    </div>
+
+    <div class="header-sep"></div>
+
+    <!-- Actions -->
+    <div class="tool-group">
+      <button class="tool-btn" id="btnUndo">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M3 13A9 9 0 1021 12"/></svg>
+        <span class="tool-tip">Annuler (Ctrl+Z)</span>
+      </button>
+      <button class="tool-btn" id="btnRedo">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6"/><path d="M21 13A9 9 0 103 12"/></svg>
+        <span class="tool-tip">Rétablir (Ctrl+Y)</span>
+      </button>
+      <button class="tool-btn" id="btnDuplicate">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        <span class="tool-tip">Dupliquer (Ctrl+D)</span>
+      </button>
+      <button class="tool-btn" id="btnDelete">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+        <span class="tool-tip">Supprimer (Suppr)</span>
+      </button>
+    </div>
+
+    <div class="header-sep"></div>
+
+    <!-- Vue -->
+    <div class="tool-group">
+      <button class="tool-btn" id="btnGrid">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>
+        <span class="tool-tip">Grille (G)</span>
+      </button>
+    </div>
+
+    <div class="header-right">
+      <button class="tool-btn" id="btnZoomOut">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      </button>
+      <span class="zoom-display" id="zoomDisplay">100%</span>
+      <button class="tool-btn" id="btnZoomIn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      </button>
+      <div class="header-sep"></div>
+      <button class="hbtn" id="btnExportJSON">↓ JSON</button>
+      <button class="hbtn" id="btnImportJSON">↑ JSON</button>
+      <button class="hbtn danger" id="btnClear">Nouveau</button>
+    </div>
+  </header>
+
+  <!-- PANNEAU GAUCHE -->
+  <aside class="left-panel">
+
+    <!-- Pages -->
+    <div class="panel-section">
+      <div class="panel-title-row">
+        <div class="panel-title">Pages</div>
+        <button class="panel-icon-btn" id="btnAddPage" title="Nouvelle page">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+      <div id="pagesList"></div>
+    </div>
+
+    <!-- Composants -->
+    <div class="panel-section">
+      <div class="panel-title">Composants</div>
+      <div class="comp-grid" id="compGrid"></div>
+    </div>
+
+    <!-- Calques -->
+    <div class="panel-section">
+      <div class="panel-title">Calques</div>
+      <div id="layersList"></div>
+    </div>
+
+  </aside>
+
+  <!-- CANVAS -->
+  <div class="canvas-area tool-select" id="canvasArea">
+    <div class="ruler-corner"></div>
+    <div class="ruler-h" id="rulerH"><canvas id="rulerHCanvas"></canvas></div>
+    <div class="ruler-v" id="rulerV"><canvas id="rulerVCanvas"></canvas></div>
+    <canvas id="mainCanvas"></canvas>
+    <div id="elementsContainer" style="position:absolute;top:0;left:0;"></div>
+    <div class="sel-box" id="selBox" style="display:none;"></div>
+    <div class="canvas-empty-hint" id="canvasEmptyHint">
+      <div class="canvas-empty-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <div class="canvas-empty-text">Glissez un composant<br>ou dessinez avec les outils</div>
+    </div>
+  </div>
+
+  <!-- PANNEAU DROIT -->
+  <aside class="right-panel" id="rightPanel">
+    <div id="noSelection" class="no-selection">
+      <div class="no-sel-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 3l14 9-7 1-4 7z"/></svg>
+      </div>
+      <div class="no-sel-text">Sélectionnez un élément</div>
+      <div class="no-sel-hint">pour modifier ses propriétés</div>
+    </div>
+    <div id="propsPanel" style="display:none;"></div>
+  </aside>
+
+</div>
+
+<!-- MENU CONTEXTUEL -->
+<div class="ctx-menu" id="ctxMenu" style="display:none;"></div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- Inputs cachés -->
+<input type="file" id="importFileInput" accept=".json" style="display:none;">
+<input type="color" id="colorPicker" style="opacity:0;position:absolute;pointer-events:none;">
+
+<script src="js/state.js"></script>
+<script src="js/components.js"></script>
+<script src="js/render.js"></script>
+<script src="js/events.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
