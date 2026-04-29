@@ -209,6 +209,28 @@ function loadStarter() {
   saveHistory();
 }
 
+// ============================================================ PANNEAUX MOBILES
+const APP_EL = document.getElementById('app');
+const MOBILE_OVERLAY = document.getElementById('mobileOverlay');
+
+function closeMobilePanels() {
+  APP_EL.classList.remove('panel-left-open', 'panel-right-open');
+}
+
+document.getElementById('btnToggleLeft').addEventListener('click', () => {
+  const isOpen = APP_EL.classList.contains('panel-left-open');
+  closeMobilePanels();
+  if (!isOpen) APP_EL.classList.add('panel-left-open');
+});
+
+document.getElementById('btnToggleRight').addEventListener('click', () => {
+  const isOpen = APP_EL.classList.contains('panel-right-open');
+  closeMobilePanels();
+  if (!isOpen) APP_EL.classList.add('panel-right-open');
+});
+
+MOBILE_OVERLAY.addEventListener('click', closeMobilePanels);
+
 // ============================================================ INIT
 (function init() {
   initDragFromPanel();

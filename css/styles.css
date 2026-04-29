@@ -616,3 +616,93 @@ html, body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--wire); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--ink-4); }
+
+/* ============================================================ RESPONSIVE MOBILE */
+.btn-toggle-left,
+.btn-toggle-right { display: none; }
+
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  top: var(--header);
+  background: rgba(26,23,20,0.45);
+  z-index: 299;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  /* Panels become slide-in drawers */
+  .left-panel {
+    position: fixed;
+    top: var(--header);
+    left: 0;
+    bottom: 0;
+    width: min(var(--panel), 82vw);
+    transform: translateX(-100%);
+    transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 300;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .right-panel {
+    position: fixed;
+    top: var(--header);
+    right: 0;
+    bottom: 0;
+    width: min(var(--rpanel), 88vw);
+    transform: translateX(100%);
+    transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 300;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .app.panel-left-open  .left-panel  { transform: translateX(0); }
+  .app.panel-right-open .right-panel { transform: translateX(0); }
+
+  .app.panel-left-open  .mobile-overlay,
+  .app.panel-right-open .mobile-overlay { display: block; }
+
+  .btn-toggle-left,
+  .btn-toggle-right { display: flex; }
+
+  /* Scrollable header to fit all tools */
+  .header {
+    padding: 0 6px;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .header::-webkit-scrollbar { display: none; }
+
+  /* Smaller separators on mobile */
+  .header-sep { flex-shrink: 0; }
+
+  /* Slightly larger touch targets */
+  .tool-btn {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+  }
+
+  .hbtn { flex-shrink: 0; }
+
+  /* Adjust toast for mobile */
+  .toast { bottom: 16px; font-size: 0.72rem; }
+
+  /* Context menu touch-friendly */
+  .ctx-item { padding: 10px 14px; font-size: 0.82rem; }
+}
+
+@media (max-width: 480px) {
+  /* On very small screens hide the zoom display */
+  .zoom-display { display: none; }
+
+  /* Hide export/import (keep Clear) to save space on tiny screens */
+  #btnExportJSON,
+  #btnImportJSON { display: none; }
+}

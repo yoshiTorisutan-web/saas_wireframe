@@ -14,6 +14,9 @@
 
   <!-- HEADER -->
   <header class="header">
+    <button class="tool-btn btn-toggle-left" id="btnToggleLeft" aria-label="Panneau gauche">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <div class="logo">
       <div class="logo-icon"></div>
       SKETCH
@@ -88,6 +91,9 @@
       <button class="hbtn" id="btnExportJSON">↓ JSON</button>
       <button class="hbtn" id="btnImportJSON">↑ JSON</button>
       <button class="hbtn danger" id="btnClear">Nouveau</button>
+      <button class="tool-btn btn-toggle-right" id="btnToggleRight" aria-label="Propriétés">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+      </button>
     </div>
   </header>
 
@@ -146,6 +152,8 @@
     </div>
     <div id="propsPanel" style="display:none;"></div>
   </aside>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
 
 </div>
 
